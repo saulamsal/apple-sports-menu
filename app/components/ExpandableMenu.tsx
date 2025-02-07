@@ -56,7 +56,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
 
   const height = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [40, Platform.OS === "web" ? 400 : 350],
+    outputRange: [40, Platform.OS === "web" ? 400 : 330],
   })
 
   const width = animatedValue.interpolate({
@@ -68,6 +68,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
     inputRange: [0, 0.5, 1],
     outputRange: [0, 0, 1],
   })
+
 
   return (
     <>
@@ -94,12 +95,23 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
               }}
             >
               <View>
+                
                 <TouchableOpacity
                   onPress={onToggle}
-                  className="flex-row items-center justify-between px-4 py-2 rounded-full"
                 >
-                  {!isOpen && (
-                    <View className="flex-row items-center">
+                    <Animated.View className="  flex-row items-center justify-between  rounded-full pt-1" style={{ 
+                        opacity: animatedValue.interpolate({
+                          inputRange: [0, 0.5],
+                          outputRange: [1, 0]
+                        }),
+                        transform: [{
+                          scale: animatedValue.interpolate({
+                            inputRange: [0, 0.5],
+                            outputRange: [1, 0]
+                          })
+                        }]
+                      }}>
+                        {!isOpen && (<View className="px-2 py-1 flex-row items-center justify-between">
                       <Ionicons name="search-outline" size={20} color="white" />
                       <Text className="text-white text-lg font-medium mx-2 flex-1">Search</Text>
                       <Ionicons
@@ -108,8 +120,9 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                         color="white"
                         style={{ opacity: 0.6 }}
                       />
-                    </View>
-                  )}
+                      </View>)}
+                    </Animated.View>
+                 
                 </TouchableOpacity>
 
                 <Animated.View style={{ opacity }}>
