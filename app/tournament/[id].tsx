@@ -24,7 +24,9 @@ export default function TournamentDetail() {
   const tabs = ['Yesterday', 'Today', 'Upcoming'];
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <SafeAreaView className="mx-auto flex-1 max-w-[767px] w-full pt-2"
+      style={{ flex: 1, backgroundColor: '#000' }}
+      >
       <LinearGradient 
         colors={[tournament.primaryColorHex, '#000000']} 
         style={{ height: 300, position: 'absolute', top: 0, left: 0, right: 0 }}
@@ -33,8 +35,6 @@ export default function TournamentDetail() {
       >
        
       </LinearGradient>
-
-      <SafeAreaView className="mx-auto flex-1 max-w-[767px] w-full mt-0">
 
       <View className="flex-row  justify-between px-4 py-2" >
             <TouchableOpacity 
@@ -98,6 +98,5 @@ export default function TournamentDetail() {
 
 
       </SafeAreaView>
-    </View>
   );
 } 

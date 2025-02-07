@@ -12,8 +12,9 @@ export default function Layout() {
           name="tournament/[id]" 
           options={{ 
             headerShown: false,
-            presentation: 'fullScreenModal',
-            animation: 'slide_from_bottom'
+            presentation: 'containedModal',
+            animation: 'slide_from_bottom',
+            
           }} 
         />
         </Stack> 

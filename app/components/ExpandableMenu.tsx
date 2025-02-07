@@ -2,7 +2,7 @@ import { View, TouchableOpacity, Text, Animated, Dimensions, TouchableWithoutFee
 import { BlurView } from 'expo-blur';
 import { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -73,74 +73,90 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
     });
 
     return (
-        <Animated.View
-            style={{
-                height: menuHeight,
-                width: menuWidth,
-                overflow: 'hidden',
-                zIndex: 101,
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                zIndex: 101,
-            }}
-        >
-            <BlurView intensity={isOpen ? 90 : 20} tint="light" className={`rounded-[30px] overflow-hidden
-      border ${isOpen ? 'border-white/30' : 'border-white/10'} ${isOpen ? 'h-auto' : 'h-full'} 
-     
-     
-      `}>
-                <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-                    <View className="">
-                        <TouchableOpacity
-                            onPress={onToggle}
-                            className="flex-row items-center justify-between px-4 py-2  rounded-full "
-                        >
-
-                            {!isOpen && (
-                                <View className="flex-row items-center">
-                                    <Ionicons name="search-outline" size={20} color="white" />
-                                    <Text className="text-white text-lg font-medium mx-2 flex-1">Search</Text>
-                                    <Ionicons
-                                        name={isOpen ? "close-outline" : "menu-outline"}
-                                        size={20}
-                                        color="white"
-                                        style={{ opacity: 0.6 }}
-                                    />
-                                </View>
-                            )}
-
-                        </TouchableOpacity>
-
-                        <Animated.ScrollView 
-                            style={{ opacity }}
-                            contentContainerStyle={{ 
-                                flexGrow: 1,
-                                paddingBottom: 20 
-                            }}
-                            bounces={true}
-                            alwaysBounceVertical={true}
-                            showsVerticalScrollIndicator={false}
-                            overScrollMode="always"
-                        >
-                            <View style={{ minHeight: '100%' }}>
-                                <ExpandedHeader />
-                                {menuItems.map((item, index) => (
-                                    <TouchableOpacity
-                                        key={index}
-                                        className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
-                                    >
-                                        <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
-                                            <Ionicons name={item.icon} size={18} color="white" />
-                                        </View>
-                                        <Text className="text-white text-lg font-semibold ml-4">{item.label}</Text>
-                                    </TouchableOpacity>
-                                ))}
-                            </View>
-                        </Animated.ScrollView>
-                    </View>
+        <>
+            {isOpen && (
+                <TouchableWithoutFeedback onPress={onToggle}>
+                    <Animated.View 
+                        style={{
+                            position: 'absolute',
+                            top: -1000,
+                            left: -1000,
+                            right: -1000,
+                            bottom: -1000,
+                            backgroundColor: 'rgba(0,0,0,0.25)',
+                            opacity: animation,
+                            zIndex: 99
+                        }}
+                    />
                 </TouchableWithoutFeedback>
-            </BlurView>
-        </Animated.View>
+            )}
+            <Animated.View
+                style={{
+                    height: menuHeight,
+                    width: menuWidth,
+                    overflow: 'hidden',
+                    zIndex: 100,
+                    position: 'absolute',
+                    right: 0,
+                    top: 0,
+                }}
+            >
+                <BlurView intensity={isOpen ? 90 : 20} tint={Platform.OS === "web" ? "dark" : "light"} className={`rounded-[30px] overflow-hidden
+      border ${isOpen ? 'border-white/30' : 'border-white/10'} ${isOpen ? 'h-auto' : 'h-full'}`}>
+                    <TouchableWithoutFeedback onPress={(e) => {
+                        e.stopPropagation();
+                    }}>
+                        <View className="">
+                            <TouchableOpacity
+                                onPress={onToggle}
+                                className="flex-row items-center justify-between px-4 py-2  rounded-full "
+                            >
+
+                                {!isOpen && (
+                                    <View className="flex-row items-center">
+                                        <Ionicons name="search-outline" size={20} color="white" />
+                                        <Text className="text-white text-lg font-medium mx-2 flex-1">Search</Text>
+                                        <Ionicons
+                                            name={isOpen ? "close-outline" : "menu-outline"}
+                                            size={20}
+                                            color="white"
+                                            style={{ opacity: 0.6 }}
+                                        />
+                                    </View>
+                                )}
+
+                            </TouchableOpacity>
+
+                            <Animated.ScrollView 
+                                style={{ opacity }}
+                                contentContainerStyle={{ 
+                                    flexGrow: 1,
+                                    paddingBottom: 20 
+                                }}
+                                bounces={true}
+                                alwaysBounceVertical={true}
+                                showsVerticalScrollIndicator={false}
+                                overScrollMode="always"
+                            >
+                                <View style={{ minHeight: '100%' }}>
+                                    <ExpandedHeader />
+                                    {menuItems.map((item, index) => (
+                                        <TouchableOpacity
+                                            key={index}
+                                            className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
+                                        >
+                                            <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
+                                                <Ionicons name={item.icon} size={18} color="white" />
+                                            </View>
+                                            <Text className="text-white text-lg font-semibold ml-4">{item.label}</Text>
+                                        </TouchableOpacity>
+                                    ))}
+                                </View>
+                            </Animated.ScrollView>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </BlurView>
+            </Animated.View>
+        </>
     );
 } 
