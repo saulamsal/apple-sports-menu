@@ -65,7 +65,7 @@ export default function Home() {
                 <TextInput 
                   placeholder="Leagues and Teams"
                   placeholderTextColor="#A0A0A0"
-                  className="flex-1 text-white text-lg active:outline-none outline-none py-2.5"
+                  className="flex-1 text-white text-lg active:outline-none outline-none py-2.5 "
                 />
                 <Ionicons name="mic" size={20} color="white" />
               </View>

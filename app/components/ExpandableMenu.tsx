@@ -56,7 +56,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
 
   const height = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [40, Platform.OS === "web" ? 400 : 330],
+    outputRange: [40, Platform.OS === "web" ? 370 : 330],
   })
 
   const width = animatedValue.interpolate({
@@ -101,15 +101,19 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                 >
                     <Animated.View className="  flex-row items-center justify-between  rounded-full pt-1" style={{ 
                         opacity: animatedValue.interpolate({
-                          inputRange: [0, 0.5],
+                          inputRange: [0, 0],
                           outputRange: [1, 0]
                         }),
-                        transform: [{
-                          scale: animatedValue.interpolate({
-                            inputRange: [0, 0.5],
-                            outputRange: [1, 0]
-                          })
-                        }]
+                        height: animatedValue.interpolate({
+                          inputRange: [0, 0],
+                          outputRange: [36, 0]
+                        }),
+                        // transform: [{
+                        //   scale: animatedValue.interpolate({
+                        //     inputRange: [0, 0.5],
+                        //     outputRange: [1, 0]
+                        //   })
+                        // }]
                       }}>
                         {!isOpen && (<View className="px-2 py-1 flex-row items-center justify-between">
                       <Ionicons name="search-outline" size={20} color="white" />
@@ -140,7 +144,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                         {menuItems.map((item, index) => (
                           <TouchableOpacity
                             key={index}
-                            className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === "search-outline" ? "bg-white/10" : ""}`}
+                            className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full  ${item.icon === "search-outline" ? "bg-white/10" : ""}`}
                           >
                             <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
                               <Ionicons name={item.icon} size={18} color="white" />
