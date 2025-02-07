@@ -36,7 +36,7 @@ export default function TournamentDetail() {
 
       <SafeAreaView className="mx-auto flex-1 max-w-[767px] w-full">
 
-      <View className="flex-row  justify-between px-4 py-2">
+      <View className="flex-row  justify-between px-4 py-2" >
             <TouchableOpacity 
               onPress={() => router.back()}
               className="bg-black/30 rounded-full  w-10 h-10  justify-center items-center"
@@ -65,15 +65,13 @@ export default function TournamentDetail() {
             </TouchableOpacity>
           </View>
 
-          <View className="mx-4 mt-4">
-            <View className="bg-[#1C1C1E] rounded-xl p-1 flex-row">
+          <View className="mx-4 mt-4 bg-white/10  rounded-3xl h-40 ">
+            <View className=" rounded-xl p-1 flex-row border-b border-white/10 ">
               {tabs.map((tab) => (
                 <Pressable
                   key={tab}
                   onPress={() => setSelectedTab(tab)}
-                  className={`flex-1 py-2 px-4 rounded-lg ${
-                    selectedTab === tab ? 'bg-white/10' : ''
-                  }`}
+                  className={`flex-1 py-2 px-4 rounded-lg`}
                 >
                   <Text 
                     className={`text-center text-base ${
@@ -86,12 +84,19 @@ export default function TournamentDetail() {
                   </Text>
                 </Pressable>
               ))}
-            </View>
-          </View>
 
-        <View className="flex-1 items-center justify-center">
+              
+            </View>
+
+            <View className="items-center justify-center flex-1">
           <Text className="text-white text-xl">No Games {selectedTab}</Text>
         </View>
+ 
+
+        
+        </View>
+
+
       </SafeAreaView>
     </View>
   );
