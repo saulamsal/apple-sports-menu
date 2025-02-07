@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import {ScrollView} from 'react-native-gesture-handler';
 
 
 const menuItems = [
@@ -51,19 +52,19 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
         Animated.spring(animation, {
             toValue: isOpen ? 1 : 0,
             useNativeDriver: false,
-            tension: 40,
+            tension: 50,
             friction: 8
         }).start();
     }, [isOpen]);
 
     const menuHeight = animation.interpolate({
         inputRange: [0, 1],
-        outputRange: [44, 420]
+        outputRange: [40, 420]
     });
 
     const menuWidth = animation.interpolate({
         inputRange: [0, 1],
-        outputRange: [140, 320]
+        outputRange: [140, 250]
     });
 
     const opacity = animation.interpolate({
@@ -81,10 +82,13 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                 position: 'absolute',
                 right: 0,
                 top: 0,
+                zIndex: 101,
             }}
         >
-            <BlurView intensity={isOpen ? 60 : 20} tint="light" className={`rounded-[30px] overflow-hidden
-      border-hairline border-white/${isOpen ? '70' : '30'} ${isOpen ? 'h-auto' : 'h-full'}
+            <BlurView intensity={isOpen ? 90 : 20} tint="light" className={`rounded-[30px] overflow-hidden
+      border ${isOpen ? 'border-white/30' : 'border-white/10'} ${isOpen ? 'h-auto' : 'h-full'} 
+     
+     
       `}>
                 <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
                     <View className="">
@@ -108,12 +112,16 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
 
                         </TouchableOpacity>
 
-                        <Animated.View style={{ opacity }} className="-mt-2">
+                        <Animated.ScrollView 
+                            style={{ opacity }} 
+                            bounces={true}
+                            alwaysBounceVertical={true}
+                        >
                             <ExpandedHeader />
                             {menuItems.map((item, index) => (
                                 <TouchableOpacity
                                     key={index}
-                                    className={`flex-row items-center py-2 my-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
+                                    className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
                                 >
                                     <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
                                         <Ionicons name={item.icon} size={18} color="white" />
@@ -121,7 +129,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                                     <Text className="text-white text-lg font-semibold ml-4">{item.label}</Text>
                                 </TouchableOpacity>
                             ))}
-                        </Animated.View>
+                        </Animated.ScrollView>
                     </View>
                 </TouchableWithoutFeedback>
             </BlurView>

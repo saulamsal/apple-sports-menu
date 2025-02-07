@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#000000' }}>
+    <View style={{ flex: 1, backgroundColor: '#000000'  }}>
       <StatusBar style="light" />
       <LinearGradient
         colors={['#015A00', 'transparent']}
@@ -64,7 +64,7 @@ export default function Home() {
         </TouchableWithoutFeedback>
       </Animated.View>
 
-      <SafeAreaView className="flex-1">
+      <SafeAreaView className="flex-1 max-w-[767px] mx-auto">
         <Stack.Screen 
           options={{ 
             headerShown: false,
@@ -75,8 +75,8 @@ export default function Home() {
           {/* Header */}
           <View className="flex-row items-center justify-between mb-4 ">
             <View className="flex-row items-center">
-              <AntDesign name="apple1" size={40} color="white" />
-              <Text className="text-white text-3xl font-semibold ml-2">Sports</Text>
+              <AntDesign name="apple1" size={30} color="white" />
+              <Text className="text-white text-4xl  pt-2 relative">Sports</Text>
             </View>
 
             <ExpandableMenu isOpen={showMenu} onToggle={toggleMenu} />
@@ -88,13 +88,13 @@ export default function Home() {
           {/* Search Bar */}
       
             <View className="mb-4">
-              <BlurView intensity={20} tint="dark" className="overflow-hidden rounded-xl">
-                <View className="flex-row items-center p-3">
+              <BlurView intensity={20} tint="light" className="overflow-hidden rounded-xl">
+                <View className="flex-row items-center px-2 py-2.5">
                   <Ionicons name="search" size={20} color="white" className="mr-2" />
                   <TextInput 
                     placeholder="Leagues and Teams"
                     placeholderTextColor="#A0A0A0"
-                    className="flex-1 text-white text-lg"
+                    className="flex-1 text-white text-lg -mt-2"
                   />
                   <Ionicons name="mic" size={20} color="white" />
                 </View>
@@ -102,10 +102,13 @@ export default function Home() {
             </View>
      
 
-          {/* Browse Sports */}
-          <Text className="text-white text-2xl font-semibold mb-4">Browse Sports</Text>
           
           <ScrollView showsVerticalScrollIndicator={false} className="space-y-4">
+
+                      {/* Browse Sports */}
+          <Text className="text-white text-2xl font-semibold mb-4">Browse Sports</Text>
+
+
             <View className="flex-row flex-wrap justify-between">
               {tournaments.map((tournament) => (
                 <TouchableOpacity 
@@ -113,14 +116,14 @@ export default function Home() {
                   className="w-[31%] mb-6 items-center"
                   onPress={() => router.push(`/tournament/${tournament.id}` as any)}
                 >
-                  <View className="w-20 h-20 bg-black/30 rounded-full items-center justify-center mb-2">
+                  <View className="w-20 h-20  rounded-full items-center justify-center mb-2 bg-white/10">
                     <Image 
                       source={{ uri: `https://img.sofascore.com/api/v1/team/${tournament.id}/image` }}
                       className="w-12 h-12"
                       resizeMode="contain"
                     />
                   </View>
-                  <Text className="text-white text-center text-sm">{tournament.name}</Text>
+                  <Text className="text-white text-center font-semibold text-sm">{tournament.name}</Text>
                 </TouchableOpacity>
               ))}
             </View>
