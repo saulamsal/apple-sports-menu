@@ -56,7 +56,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
 
   const height = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [40, 350],
+    outputRange: [40, Platform.OS === "web" ? 400 : 350],
   })
 
   const width = animatedValue.interpolate({
@@ -113,15 +113,17 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                 </TouchableOpacity>
 
                 <Animated.View style={{ opacity }}>
-           
+                <ExpandedHeader />
                     <ScrollView
                       bounces={true}
                       alwaysBounceVertical={true}
                       showsVerticalScrollIndicator={false}
                       overScrollMode="always"
+                    //   stickyHeaderIndices={[0]}
                     >
+                                  
                       <View style={{ minHeight: "100%" }}>
-                        <ExpandedHeader />
+           
                         {menuItems.map((item, index) => (
                           <TouchableOpacity
                             key={index}
