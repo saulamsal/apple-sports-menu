@@ -46,8 +46,8 @@ export default function TournamentDetail() {
             <View className="flex-1 items-center">
               <View className={`w-14 h-14 rounded-sm items-center justify-center mb-2`}>
                 <Image 
-                  source={{ uri: `https://img.sofascore.com/api/v1/team/${tournament.id}/image` }}
-                  style={{ width: 40, height: 40 }}
+                      source={{ uri: `https://img.sofascore.com/api/v1/unique-tournament/${tournament.id}/image/dark` }}
+                      style={{ width: 40, height: 40 }}
                 />
               </View>
               <Text className="text-white text-2xl font-semibold">{tournament.name}</Text>

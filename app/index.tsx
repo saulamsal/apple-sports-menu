@@ -86,9 +86,10 @@ export default function Home() {
                   className="w-[31%] mb-6 items-center"
                   onPress={() => router.push(`/tournament/${tournament.id}` as any)}
                 >
+             
                   <View className="w-20 h-20  rounded-full items-center justify-center mb-2 bg-white/10">
                     <Image 
-                      source={{ uri: `https://img.sofascore.com/api/v1/team/${tournament.id}/image` }}
+                      source={{ uri: `https://img.sofascore.com/api/v1/unique-tournament/${tournament.id}/image/dark` }}
                       className="w-12 h-12"
                       resizeMode="contain"
                     />
