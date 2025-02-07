@@ -109,7 +109,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                 }}
             >
                 <BlurView intensity={isOpen ? 90 : 20} tint={Platform.OS === "web" ? "dark" : "light"} className={`rounded-[30px] overflow-hidden
-      border ${isOpen ? 'border-white/30' : 'border-white/10'} ${isOpen ? 'h-auto' : 'h-full'}`}>
+      border ${isOpen ? 'border-white/10' : 'border-white/10'} ${isOpen ? 'h-auto' : 'h-full'}`}>
                     <TouchableWithoutFeedback onPress={(e) => {
                         e.stopPropagation();
                     }}>
