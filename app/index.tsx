@@ -94,7 +94,7 @@ export default function Home() {
                       resizeMode="contain"
                     />
                   </View>
-                  <Text className="text-white text-center font-semibold text-sm">{tournament.name}</Text>
+                  <Text className="text-gray-400 text-center font-semibold text-sm">{tournament.name}</Text>
                 </TouchableOpacity>
               ))}
             </View>
