@@ -1,9 +1,9 @@
 import { Stack } from 'expo-router';
-import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Dimensions } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -15,6 +15,19 @@ export default function Home() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const screenHeight = Dimensions.get('window').height;
+  const backdropAnimation = useRef(new Animated.Value(0)).current;
+
+  const toggleMenu = () => {
+    const toValue = showMenu ? 0 : 1;
+    setShowMenu(!showMenu);
+    
+    Animated.spring(backdropAnimation, {
+      toValue,
+      useNativeDriver: true,
+      tension: 40,
+      friction: 8
+    }).start();
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: '#000000' }}>
@@ -30,6 +43,27 @@ export default function Home() {
         }}
       />
       
+      <Animated.View 
+        pointerEvents={showMenu ? 'auto' : 'none'}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'black',
+          opacity: backdropAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 0.3]
+          }),
+          zIndex: 99
+        }}
+      >
+        <TouchableWithoutFeedback onPress={toggleMenu}>
+          <View style={{ width: '100%', height: '100%' }} />
+        </TouchableWithoutFeedback>
+      </Animated.View>
+
       <SafeAreaView className="flex-1">
         <Stack.Screen 
           options={{ 
@@ -45,9 +79,8 @@ export default function Home() {
               <Text className="text-white text-3xl font-semibold ml-2">Sports</Text>
             </View>
 
-            <View style={{ width: 140, height: 44 }}>
-              <ExpandableMenu />
-            </View>
+            <ExpandableMenu isOpen={showMenu} onToggle={toggleMenu} />
+       
             
             
           </View>
