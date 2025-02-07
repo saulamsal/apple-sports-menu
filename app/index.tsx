@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Dimensions, TouchableWithoutFeedback, Animated } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Image, ScrollView, Dimensions, TouchableWithoutFeedback, Animated, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,6 +11,7 @@ import { tournaments } from './data/tournaments';
 import { StatusBar } from 'expo-status-bar';
 import ExpandableMenu from './components/ExpandableMenu';
 
+
 export default function Home() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
@@ -21,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#000000'  , position: 'relative' }}>
+    <View style={{ flex: 1, backgroundColor: '#000000'  , position: 'relative', overflow: Platform.OS === "web" ? 'scroll' : undefined   }}>
       <StatusBar style="light" />
       <LinearGradient
         colors={['#015A00', 'transparent']}
