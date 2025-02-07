@@ -52,8 +52,9 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
         Animated.spring(animation, {
             toValue: isOpen ? 1 : 0,
             useNativeDriver: false,
-            tension: 50,
-            friction: 8
+            stiffness: 150,
+            damping: 30,
+            mass: 0.4
         }).start();
     }, [isOpen]);
 
@@ -65,6 +66,11 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
     const menuWidth = animation.interpolate({
         inputRange: [0, 1],
         outputRange: [140, 250]
+    });
+
+    const scale = animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0.95, 1]
     });
 
     const opacity = animation.interpolate({
@@ -99,6 +105,7 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                     position: 'absolute',
                     right: 0,
                     top: 0,
+                    transform: [{ scale }]
                 }}
             >
                 <BlurView intensity={isOpen ? 90 : 20} tint={Platform.OS === "web" ? "dark" : "light"} className={`rounded-[30px] overflow-hidden
@@ -129,10 +136,6 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
 
                             <Animated.ScrollView 
                                 style={{ opacity }}
-                                contentContainerStyle={{ 
-                                    flexGrow: 1,
-                                    paddingBottom: 20 
-                                }}
                                 bounces={true}
                                 alwaysBounceVertical={true}
                                 showsVerticalScrollIndicator={false}
