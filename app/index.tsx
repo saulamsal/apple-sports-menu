@@ -64,7 +64,7 @@ export default function Home() {
         </TouchableWithoutFeedback>
       </Animated.View>
 
-      <SafeAreaView className="flex-1 max-w-[767px] mx-auto">
+      <SafeAreaView className="flex-1 max-w-[767px] mx-auto w-full">
         <Stack.Screen 
           options={{ 
             headerShown: false,

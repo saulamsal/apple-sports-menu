@@ -34,7 +34,7 @@ export default function TournamentDetail() {
        
       </LinearGradient>
 
-      <SafeAreaView className="flex-1" >
+      <SafeAreaView className="mx-auto flex-1 max-w-[767px] w-full">
 
       <View className="flex-row  justify-between px-4 py-2">
             <TouchableOpacity 
