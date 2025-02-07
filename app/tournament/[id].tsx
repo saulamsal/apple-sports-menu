@@ -27,35 +27,39 @@ export default function TournamentDetail() {
     <View style={{ flex: 1, backgroundColor: '#000' }}>
       <LinearGradient 
         colors={[tournament.primaryColorHex, '#000000']} 
-        style={{ height: 300 }}
+        style={{ height: 300, position: 'absolute', top: 0, left: 0, right: 0 }}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
-        <SafeAreaView className="flex-1">
-          <View className="flex-row items-center justify-between px-4 py-2">
+       
+      </LinearGradient>
+
+      <SafeAreaView className="flex-1" >
+
+      <View className="flex-row  justify-between px-4 py-2">
             <TouchableOpacity 
               onPress={() => router.back()}
-              className="bg-black/30 rounded-full p-2"
+              className="bg-black/30 rounded-full  w-10 h-10  justify-center items-center"
             >
-              <Ionicons name="close" size={28} color="white" />
+              <Ionicons name="close" size={26} color="white" />
             </TouchableOpacity>
             <View className="flex-1 items-center">
               <View className={`w-14 h-14 rounded-sm items-center justify-center mb-2`}>
                 <Image 
                   source={{ uri: `https://img.sofascore.com/api/v1/team/${tournament.id}/image` }}
                   style={{ width: 40, height: 40 }}
-                  tintColor="white"
                 />
               </View>
               <Text className="text-white text-2xl font-semibold">{tournament.name}</Text>
             </View>
             <TouchableOpacity 
               onPress={() => setIsFavorite(!isFavorite)}
-              className="bg-black/30 rounded-full p-2"
+              className="bg-black/30 rounded-full  w-10 h-10  justify-center items-center"
+
             >
               <Ionicons 
                 name={isFavorite ? "star" : "star-outline"} 
-                size={24} 
+                size={20} 
                 color="white" 
               />
             </TouchableOpacity>
@@ -84,10 +88,7 @@ export default function TournamentDetail() {
               ))}
             </View>
           </View>
-        </SafeAreaView>
-      </LinearGradient>
 
-      <SafeAreaView className="flex-1" >
         <View className="flex-1 items-center justify-center">
           <Text className="text-white text-xl">No Games {selectedTab}</Text>
         </View>
