@@ -80,8 +80,6 @@ export default function Home() {
             </View>
 
             <ExpandableMenu isOpen={showMenu} onToggle={toggleMenu} />
-       
-            
             
           </View>
 
@@ -89,12 +87,12 @@ export default function Home() {
       
             <View className="mb-4">
               <BlurView intensity={20} tint="light" className="overflow-hidden rounded-xl">
-                <View className="flex-row items-center px-2 py-2.5">
+                <View className="flex-row items-center px-2 ">
                   <Ionicons name="search" size={20} color="white" className="mr-2" />
                   <TextInput 
                     placeholder="Leagues and Teams"
                     placeholderTextColor="#A0A0A0"
-                    className="flex-1 text-white text-lg -mt-2"
+                    className="flex-1 text-white text-lg active:outline-none outline-none py-2.5"
                   />
                   <Ionicons name="mic" size={20} color="white" />
                 </View>

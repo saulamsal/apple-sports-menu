@@ -113,22 +113,30 @@ export default function ExpandableMenu({ isOpen, onToggle }: ExpandableMenuProps
                         </TouchableOpacity>
 
                         <Animated.ScrollView 
-                            style={{ opacity }} 
+                            style={{ opacity }}
+                            contentContainerStyle={{ 
+                                flexGrow: 1,
+                                paddingBottom: 20 
+                            }}
                             bounces={true}
                             alwaysBounceVertical={true}
+                            showsVerticalScrollIndicator={false}
+                            overScrollMode="always"
                         >
-                            <ExpandedHeader />
-                            {menuItems.map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
-                                >
-                                    <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
-                                        <Ionicons name={item.icon} size={18} color="white" />
-                                    </View>
-                                    <Text className="text-white text-lg font-semibold ml-4">{item.label}</Text>
-                                </TouchableOpacity>
-                            ))}
+                            <View style={{ minHeight: '100%' }}>
+                                <ExpandedHeader />
+                                {menuItems.map((item, index) => (
+                                    <TouchableOpacity
+                                        key={index}
+                                        className={`flex-row items-center py-2 mb-2 px-2 mx-2 rounded-full active:bg-white/10 ${item.icon === 'search-outline' ? 'bg-white/10' : ''}`}
+                                    >
+                                        <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center">
+                                            <Ionicons name={item.icon} size={18} color="white" />
+                                        </View>
+                                        <Text className="text-white text-lg font-semibold ml-4">{item.label}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
                         </Animated.ScrollView>
                     </View>
                 </TouchableWithoutFeedback>
