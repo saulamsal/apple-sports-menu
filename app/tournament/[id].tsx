@@ -24,79 +24,71 @@ export default function TournamentDetail() {
   const tabs = ['Yesterday', 'Today', 'Upcoming'];
 
   return (
-      <SafeAreaView className="mx-auto flex-1 max-w-[767px] w-full pt-2"
-      style={{ flex: 1, backgroundColor: '#000' }}
-      >
+    <View style={{ flex: 1, backgroundColor: '#000000', position: 'relative', }}>
       <LinearGradient 
         colors={[tournament.primaryColorHex, '#000000']} 
         style={{ height: 300, position: 'absolute', top: 0, left: 0, right: 0 }}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-      >
-       
-      </LinearGradient>
+      />
 
-      <View className="flex-row  justify-between px-4 py-2" >
-            <TouchableOpacity 
-              onPress={() => router.back()}
-              className="bg-black/30 rounded-full  w-10 h-10  justify-center items-center"
-            >
-              <Ionicons name="close" size={26} color="white" />
-            </TouchableOpacity>
-            <View className="flex-1 items-center">
-              <View className={`w-14 h-14 rounded-sm items-center justify-center mb-2`}>
-                <Image 
-                      source={{ uri: `https://img.sofascore.com/api/v1/unique-tournament/${tournament.id}/image/dark` }}
-                      style={{ width: 40, height: 40 }}
-                />
-              </View>
-              <Text className="text-white text-2xl font-semibold">{tournament.name}</Text>
-            </View>
-            <TouchableOpacity 
-              onPress={() => setIsFavorite(!isFavorite)}
-              className="bg-black/30 rounded-full  w-10 h-10  justify-center items-center"
+      <SafeAreaView className="flex-1 max-w-[767px] mx-auto w-full mt-4">
+        <View className="flex-row justify-between px-4">
+          <TouchableOpacity 
+            onPress={() => router.back()}
+            className="bg-black/30 rounded-full w-10 h-10 justify-center items-center"
+          >
+            <Ionicons name="close" size={26} color="white" />
+          </TouchableOpacity>
 
-            >
-              <Ionicons 
-                name={isFavorite ? "star" : "star-outline"} 
-                size={20} 
-                color="white" 
+          <View className="flex-1 items-center">
+            <View className="w-14 h-14 rounded-sm items-center justify-center mb-2">
+              <Image 
+                source={{ uri: `https://img.sofascore.com/api/v1/unique-tournament/${tournament.id}/image/dark` }}
+                style={{ width: 40, height: 40 }}
               />
-            </TouchableOpacity>
+            </View>
+            <Text className="text-white text-2xl font-semibold">{tournament.name}</Text>
           </View>
 
-          <View className="mx-4 mt-4 bg-white/10  rounded-3xl h-40 ">
-            <View className=" rounded-xl p-1 flex-row border-b border-white/10 ">
-              {tabs.map((tab) => (
-                <Pressable
-                  key={tab}
-                  onPress={() => setSelectedTab(tab)}
-                  className={`flex-1 py-2 px-4 rounded-lg`}
+          <TouchableOpacity 
+            onPress={() => setIsFavorite(!isFavorite)}
+            className="bg-black/30 rounded-full w-10 h-10 justify-center items-center"
+          >
+            <Ionicons 
+              name={isFavorite ? "star" : "star-outline"} 
+              size={20} 
+              color="white" 
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View className=" mx-4 mt-4 bg-white/10 rounded-3xl h-40">
+          <View className="rounded-xl p-1 flex-row border-b border-white/10">
+            {tabs.map((tab) => (
+              <Pressable
+                key={tab}
+                onPress={() => setSelectedTab(tab)}
+                className="flex-1 py-2 px-4 rounded-lg"
+              >
+                <Text 
+                  className={`text-center text-base ${
+                    selectedTab === tab 
+                      ? 'text-white font-semibold' 
+                      : 'text-white/60'
+                  }`}
                 >
-                  <Text 
-                    className={`text-center text-base ${
-                      selectedTab === tab 
-                        ? 'text-white font-semibold' 
-                        : 'text-white/60'
-                    }`}
-                  >
-                    {tab}
-                  </Text>
-                </Pressable>
-              ))}
+                  {tab}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
 
-              
-            </View>
-
-            <View className="items-center justify-center flex-1">
-          <Text className="text-white text-xl">No Games {selectedTab}</Text>
+          <View className="items-center justify-center flex-1">
+            <Text className="text-white text-xl">No Games {selectedTab}</Text>
+          </View>
         </View>
- 
-
-        
-        </View>
-
-
       </SafeAreaView>
+    </View>
   );
 } 
